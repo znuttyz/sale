@@ -1,0 +1,32 @@
+.Sale-container {
+	padding: 15px;
+}
+
+.Sale-input {
+	margin-top: 10px;
+	width: 98%;
+	border: none;
+	font-size: 20px;
+	border-bottom: 1px solid black;
+}
+
+.Sale-input:focus {
+	outline: none;
+}
+
+.Sale-button {
+	font-size: 20px;
+	font-weight: bold;
+	width: 98%;
+	height: 40px;
+	color: white;
+	background-color: #3B5998;
+	border: none;
+}
+
+.Sale-select {
+	display: block;
+	font-size: 24px;
+    padding: 10px;
+    border: none;
+}
