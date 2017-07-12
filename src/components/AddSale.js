@@ -28,7 +28,7 @@ export default class AddSale extends Component {
 		console.log(this.state.type, this.state.piece)
 		return (
 			<div>
-				<Header />
+				<Header isBack={true}/>
 					<div className="Sale-container">
 						<h2 style={{textAlign: 'center'}}>Sale</h2>
 						<label htmlFor="name" style={{color: 'gray'}}>Name</label>

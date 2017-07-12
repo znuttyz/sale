@@ -19,13 +19,23 @@ const style = {
 		backgroundColor: 'transparent',
 		border: 'none',
 		padding: '0 15px'
-	}
+	},
+	buttonIconStyle: {
+		color: 'white',
+		position: 'absolute', 
+		left: '0.2em', 
+		fontSize: '23px',
+		marginTop: '0.5em',
+		backgroundColor: 'transparent',
+		border: 'none',
+		padding: '5px 12px'
+	},
 }
 
-const Header = ({ isPlus }) => {
+const Header = ({ isPlus, isBack }) => {
 	return(
 		<div style={style.containerStyle}>
-		 	<button style={{...style.buttonTextStyle, left: '0.2em'}}>{'<'}</button>
+		 	{ (isBack) ? <button style={style.buttonIconStyle}><i className="fa fa-chevron-left" aria-hidden="true" style={{color: 'white'}}></i></button> : '' }
 			<h3 style={style.textStyle}> Hello Header</h3>
 			{ (isPlus) ? <button style={style.buttonTextStyle}>+</button> : '' }
 			
