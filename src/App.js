@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
-import Home from './components/Home';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import ReduxThunk from 'redux-thunk';
 
-import Login from './components/Login';
-import AddSale from './components/AddSale';
+import reducers from './reducers';
+import Routes from './Routes';
 
 class App extends Component {
   render() {
+  	const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
+
     return (
-      <AddSale />
+        <Provider store={store}>
+			<Routes />
+		</Provider>
     );
   }
 }

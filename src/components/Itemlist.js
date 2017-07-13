@@ -1,7 +1,31 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { saleFetch } from '../actions';
 import { CardSection, Item } from './element';
 
-export default class Itemlist extends Component {
+class Itemlist extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			saleList: []
+		}
+	}
+
+	componentWillMount() {
+		this.props.saleFetch();
+	}
+
+	componentWillReceiveProps(nextProp) {
+		// Set sale list
+		const snapshot = nextProp.saleList;
+		let saleList = [];
+		snapshot.forEach(function(childSnapshot) {
+	      var childData = childSnapshot.val();
+	      childData.id = childSnapshot.key;
+	      saleList.push(childData);
+	    });
+	    this.setState({ saleList })
+	}
 
 	_handleItem(id) {
 		/* eslint-disable no-restricted-globals */
@@ -13,44 +37,65 @@ export default class Itemlist extends Component {
 	render() {
 		return (
 			<div>
-				<CardSection>
-					<Item 
-						id="1234" 
-						date="11 July 2017"
-						name="Nuttapon Phannurat"
-						type="White testest teste"
-						gram="20 test"
-						piece="100 test"
-						price="50000 test"
-						color="#F0FFEC"
-						click={() => this._handleItem(1234)}
-					/>
-				</CardSection>
-				<CardSection>
-					<Item 
-						id="1234" 
-						date="11 July 2017"
-						name="Nuttapon Phannurat"
-						type="White testest teste"
-						gram="20 test"
-						piece="100 test"
-						color="#ffeeec"
-						price="50000 test"
-					/>
-				</CardSection>
-				<CardSection>
-					<Item 
-						id="1234" 
-						date="11 July 2017"
-						name="Nuttapon Phannurat"
-						type="White testest teste"
-						gram="20 test"
-						piece="100 test"
-						color="#ffeeec"
-						price="50000 test"
-					/>
-				</CardSection>
+				{
+					this.state.saleList.map((sale) => {
+						let color = "";
+						if(sale.status === 0) color = "#ffeeec";
+						else color = "#F0FFEC"
+						return (
+							<CardSection key={sale.id}>
+								<Item 
+									id="" 
+									date={sale.date}
+									name={sale.name}
+									type={sale.type}
+									gram={sale.gram}
+									piece={sale.piece}
+									price={sale.price}
+									color={color}
+									click={() => this._handleItem(sale.id)}
+								/>
+							</CardSection>
+						);
+					})
+				}
+				
+				
 			</div>
 		);
 	}
 }
+
+const mapStateToProps = ({ sale }) => {
+	const { saleList } = sale;
+	return {
+		saleList
+	}
+}
+
+export default connect(mapStateToProps, {saleFetch})(Itemlist);
+
+// <CardSection>
+// 					<Item 
+// 						id="1234" 
+// 						date="11 July 2017"
+// 						name="Nuttapon Phannurat"
+// 						type="White testest teste"
+// 						gram="20 test"
+// 						piece="100 test"
+// 						color="#ffeeec"
+// 						price="50000 test"
+// 					/>
+// 				</CardSection>
+// 				<CardSection>
+// 					<Item 
+// 						id="1234" 
+// 						date="11 July 2017"
+// 						name="Nuttapon Phannurat"
+// 						type="White testest teste"
+// 						gram="20 test"
+// 						piece="100 test"
+// 						color="#ffeeec"
+// 						price="50000 test"
+// 					/>
+// 				</CardSection>

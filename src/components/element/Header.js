@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const style = {
 	containerStyle: {
@@ -35,9 +36,9 @@ const style = {
 const Header = ({ isPlus, isBack }) => {
 	return(
 		<div style={style.containerStyle}>
-		 	{ (isBack) ? <button style={style.buttonIconStyle}><i className="fa fa-chevron-left" aria-hidden="true" style={{color: 'white'}}></i></button> : '' }
+		 	{ (isBack) ? <Link to="/home"><button style={style.buttonIconStyle}><i className="fa fa-chevron-left" aria-hidden="true" style={{color: 'white'}}></i></button></Link> : '' }
 			<h3 style={style.textStyle}> Hello Header</h3>
-			{ (isPlus) ? <button style={style.buttonTextStyle}>+</button> : '' }
+			{ (isPlus) ? <Link to="/addsale"><button style={style.buttonTextStyle}>+</button></Link> : '' }
 			
 		</div>
 	)

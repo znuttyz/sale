@@ -16,17 +16,17 @@ const Item = ({id, date, name, type, gram, piece, price, color, click}) => {
 	return (
 		<div style={{...style.containerStyle, backgroundColor: color}} onClick={click}>
 			<div style={style.headStyle}>
-				<p>#{id}</p>
+				<p>{id}</p>
 				<p>{date}</p>
 			</div>
-			<p>Nuttapon Phannurat</p>
+			<p>{name}</p>
 			<div style={style.headStyle}>
-				<p>White testest teste</p>
-				<p>20 test</p>
+				<p>{type}</p>
+				<p>{gram} Gram</p>
 			</div>
 			<div style={style.headStyle}>
-				<p>100 test</p>
-				<p>50000 test</p>
+				<p>{piece} ขวด</p>
+				<p style={{fontWeight: 'bold'}}>{price} บาท</p>
 			</div>
 		</div>
 	);
