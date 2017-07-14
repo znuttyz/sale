@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { saleFetch } from '../actions';
+import { saleFetch, saleUpdate, saleDelete } from '../actions';
 import { CardSection, Item } from './element';
 
 class Itemlist extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			saleList: []
+			saleList: [],
+			mouseTime: null,
 		}
 	}
 
@@ -17,26 +18,40 @@ class Itemlist extends Component {
 
 	componentWillReceiveProps(nextProp) {
 		// Set sale list
-		const snapshot = nextProp.saleList;
-		let saleList = [];
-		snapshot.forEach(function(childSnapshot) {
-	      var childData = childSnapshot.val();
-	      childData.id = childSnapshot.key;
-	      saleList.push(childData);
-	    });
-	    this.setState({ saleList })
+		if(nextProp.saleList) {
+			const snapshot = nextProp.saleList;
+			let saleList = [];
+			snapshot.forEach(function(childSnapshot) {
+		      var childData = childSnapshot.val();
+		      childData.id = childSnapshot.key;
+		      saleList.push(childData);
+		    });
+		    this.setState({ saleList })
+		}
 	}
 
 	_handleItem(id) {
 		/* eslint-disable no-restricted-globals */
-		if(confirm("Are you sure?")){
-			alert(id);
-		}
+		// let holdTime = Date.now() - this.state.mouseTime;
+		// console.log(holdTime)
+		// if(holdTime > 800) {
+		// 	if(confirm("Are you sure you want to DELETE?")){
+		// 		this.props.saleDelete({id});
+			// }
+		// } else {
+			if(confirm("Are you sure?")){
+				this.props.saleUpdate({id});
+			}
+		// }
 	}
+
+	// _checkMouse() {
+	// 	this.setState({mouseTime: Date.now()});
+	// }
 
 	render() {
 		return (
-			<div>
+			<div style={{marginTop: '61px'}}>
 				{
 					this.state.saleList.map((sale) => {
 						let color = "";
@@ -73,7 +88,9 @@ const mapStateToProps = ({ sale }) => {
 	}
 }
 
-export default connect(mapStateToProps, {saleFetch})(Itemlist);
+export default connect(mapStateToProps, {
+	saleFetch, saleUpdate, saleDelete
+})(Itemlist);
 
 // <CardSection>
 // 					<Item 

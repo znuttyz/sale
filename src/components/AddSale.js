@@ -33,7 +33,7 @@ class AddSale extends Component {
 
 	render() {
 		return (
-			<div>
+			<div style={{marginTop: '61px'}}>
 				<Header isBack={true}/>
 					<div className="Sale-container">
 						<h2 style={{textAlign: 'center'}}>Sale</h2>

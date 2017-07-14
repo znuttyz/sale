@@ -1,15 +1,41 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "BEAUTY",
+  "name": "BEAUTY V1.0.1",
   "icons": [
     {
       "src": "favicon.ico",
       "sizes": "192x192",
       "type": "image/png"
+    },
+    {
+      "src": "react512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "react180.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "react120.png",
+      "sizes": "120x120",
+      "type": "image/png"
+    },
+    {
+      "src": "react144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "react76.png",
+      "sizes": "76x76",
+      "type": "image/png"
     }
   ],
-  "start_url": "./index.html",
+  "start_url": "/home",
   "display": "standalone",
+  "orientation": "portrait",
   "theme_color": "#000000",
   "background_color": "#ffffff"
 }

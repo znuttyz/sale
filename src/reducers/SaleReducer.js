@@ -1,7 +1,9 @@
 import {
 	SALE_FETCH,
 	SALE_CREATE,
-	SALE_CREATE_SUCCESS
+	SALE_CREATE_SUCCESS,
+	SALE_UPDATE,
+	SALE_DELETE
 } from '../actions/types';
 
 const INITIAL_STATE = { 
@@ -16,7 +18,9 @@ export default (state = INITIAL_STATE, action) => {
 		case SALE_CREATE: 
 			return { ...state, loading: true }
 		case SALE_CREATE_SUCCESS:
-			return { ... state, ...INITIAL_STATE }
+		case SALE_UPDATE:
+		case SALE_DELETE:
+			return { ...state, ...INITIAL_STATE }
 		default:
 			return state;
 	}

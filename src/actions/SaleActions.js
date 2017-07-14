@@ -2,17 +2,22 @@ import * as firebase from 'firebase';
 import {
 	SALE_FETCH,
 	SALE_CREATE,
-	SALE_CREATE_SUCCESS
+	SALE_CREATE_SUCCESS,
+	SALE_UPDATE,
+	SALE_DELETE
 } from './types';
 
 export const saleFetch = () => {
 	return (dispatch) => {
-		let leadsRef = firebase.database().ref('sale');
-		leadsRef.on('value', function(snapshot) {
-			dispatch({ type: SALE_FETCH, payload: snapshot });
-		});
-		
+		saleFetching(dispatch);
 	}
+}
+
+const saleFetching = (dispatch) => {
+	let saleRef = firebase.database().ref('sale');
+	saleRef.on('value', function(snapshot) {
+		dispatch({ type: SALE_FETCH, payload: snapshot });
+	});
 }
 
 export const saleCreate = ({name, type, gram, piece}) => {
@@ -48,6 +53,24 @@ export const saleCreate = ({name, type, gram, piece}) => {
 		});
 
 		
+	}
+}
+
+export const saleUpdate = ({id}) => {
+	return (dispatch) => {
+		let updates = {};
+  		updates['sale/' + id + '/status'] = 1;
+  		firebase.database().ref().update(updates);
+  		dispatch({ type: SALE_UPDATE });
+  		saleFetching(dispatch);
+	}
+}
+
+export const saleDelete = ({id}) => {
+	return (dispatch) => {
+		firebase.database().ref('sale/' + id).remove();
+		dispatch({ type: SALE_DELETE });
+  		saleFetching(dispatch);
 	}
 }
 // firebase.database().ref('sale').push({

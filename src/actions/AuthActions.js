@@ -4,8 +4,8 @@ import {
 	LOGIN_USER_SUCCESS,
 	LOGIN_USER_FAIL,
 	LOGIN_USER_CHECK,
-	LOGOUT_USER,
-	LOGOUT_USER_SUCCESS,
+	// LOGOUT_USER,
+	// LOGOUT_USER_SUCCESS,
 } from './types';
 
 export const loginUser = (username, password) => {

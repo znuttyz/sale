@@ -26,7 +26,6 @@ class Login extends Component {
 	}
 
 	render() {
-	console.log(this.props.loading);
 		return (
 			<div>
 				<Header />

@@ -1,34 +1,23 @@
 import React from 'react';
-
-const style = {
-	containerStyle: {
-		padding: 15,
-		fontSize: 20,
-		lineHeight: '1.2em',
-	},
-	headStyle: {
-		display: 'flex',
-		justifyContent: 'space-between'
-	}
-}
+import './Item.css';
 
 const Item = ({id, date, name, type, gram, piece, price, color, click}) => {
 	return (
-		<div style={{...style.containerStyle, backgroundColor: color}} onClick={click}>
-			<div style={style.headStyle}>
-				<p>{id}</p>
-				<p>{date}</p>
+			<div className="item-container" style={{backgroundColor: color}} onClick={click}>
+				<div className="item-headStyle">
+					<p>{id}</p>
+					<p>{date}</p>
+				</div>
+				<p className="bold">{name}</p>
+				<div className="item-headStyle">
+					<p>{type}</p>
+					<p>{gram} กรัม</p>
+				</div>
+				<div className="item-headStyle">
+					<p>{piece} ขวด</p>
+					<p className="bold">{price} บาท</p>
+				</div>
 			</div>
-			<p>{name}</p>
-			<div style={style.headStyle}>
-				<p>{type}</p>
-				<p>{gram} Gram</p>
-			</div>
-			<div style={style.headStyle}>
-				<p>{piece} ขวด</p>
-				<p style={{fontWeight: 'bold'}}>{price} บาท</p>
-			</div>
-		</div>
 	);
 };
 
