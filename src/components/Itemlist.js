@@ -23,31 +23,26 @@ class Itemlist extends Component {
 			let saleList = [];
 			snapshot.forEach(function(childSnapshot) {
 		      var childData = childSnapshot.val();
-		      childData.id = childSnapshot.key;
+		      childData.key = childSnapshot.key;
 		      saleList.push(childData);
 		    });
+		    saleList.reverse();
 		    this.setState({ saleList })
 		}
 	}
 
 	_handleItem(id) {
 		/* eslint-disable no-restricted-globals */
-		// let holdTime = Date.now() - this.state.mouseTime;
-		// console.log(holdTime)
-		// if(holdTime > 800) {
-		// 	if(confirm("Are you sure you want to DELETE?")){
-		// 		this.props.saleDelete({id});
-			// }
-		// } else {
-			if(confirm("Are you sure?")){
-				this.props.saleUpdate({id});
-			}
-		// }
+		if(confirm("แน่ใจนะว่าจ่ายแล้ว?")){
+			this.props.saleUpdate({id});
+		}
 	}
 
-	// _checkMouse() {
-	// 	this.setState({mouseTime: Date.now()});
-	// }
+	_handleDeleteItem(id) {
+		if(confirm("แน่ใจนะว่าจะลบ?")){
+			this.props.saleDelete({id});
+		}
+	}
 
 	render() {
 		return (
@@ -55,12 +50,28 @@ class Itemlist extends Component {
 				{
 					this.state.saleList.map((sale) => {
 						let color = "";
-						if(sale.status === 0) color = "#ffeeec";
-						else color = "#F0FFEC"
+						let handle;
+						// Set item color
+						if(sale.status === 0) {
+							if(this.props.isDel) {
+								color = "#DDCCCA"
+								handle = () => this._handleDeleteItem(sale.key);
+							}else {
+								color = "#ffeeec";
+								handle = () => this._handleItem(sale.key);
+							}
+						} else {
+							if(this.props.isDel) {
+								color = "#CBD9C8"
+								handle = () => this._handleDeleteItem(sale.key);
+							}else {
+								color = "#F0FFEC";
+							}
+						} 
 						return (
 							<CardSection key={sale.id}>
 								<Item 
-									id="" 
+									id={sale.id} 
 									date={sale.date}
 									name={sale.name}
 									type={sale.type}
@@ -68,7 +79,7 @@ class Itemlist extends Component {
 									piece={sale.piece}
 									price={sale.price}
 									color={color}
-									click={() => this._handleItem(sale.id)}
+									click={handle}
 								/>
 							</CardSection>
 						);

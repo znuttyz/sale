@@ -35,22 +35,33 @@ export const saleCreate = ({name, type, gram, piece}) => {
 		const year = date.getFullYear();
 		const today = day + ' ' + monthNames[monthIndex] + ' ' + year;
 
-		firebase.database().ref('price-list/'+type+'/'+gram+'gram')
+		firebase.database().ref('sale').limitToLast(1)
 		.once('value', function(snap) {
-		   let price = snap.val().price * piece;
-		    firebase.database().ref('sale').push({
-				name,
-				type,
-				gram,
-				piece,
-				price,
-				status: 0,
-				date: today
-			}).then(() => {
-				dispatch({ type: SALE_CREATE_SUCCESS });
-				window.location = "/";
+			let id = Object.values(snap.val())[0].id;
+
+			firebase.database().ref('price-list/'+type+'/'+gram+'gram')
+			.once('value', function(snap2) {
+			    let price = snap2.val().price * piece;
+
+			    firebase.database().ref('sale').push({
+			    	id: ++id,
+					name,
+					type,
+					gram,
+					piece,
+					price,
+					status: 0,
+					date: today
+				}).then(() => {
+					dispatch({ type: SALE_CREATE_SUCCESS });
+					window.location = "/";
+				});
+
 			});
+
 		});
+
+		
 
 		
 	}

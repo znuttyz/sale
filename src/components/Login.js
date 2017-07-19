@@ -20,7 +20,8 @@ class Login extends Component {
 	    });
 	}
 
-	_onSubmit() {
+	_onSubmit(e) {
+		e.preventDefault();
 		const { username, password } = this.state;
 		this.props.loginUser(username, password); 
 	}
@@ -29,23 +30,26 @@ class Login extends Component {
 		return (
 			<div>
 				<Header />
-				<CardSection>
-					<div className="login-container">
-						<label htmlFor="username" style={{color: 'gray'}}>Username</label>
-						<input type="email" className="login-input" name="username" onChange={(event) => this._onHandleChange(event)} value={this.state.username}/>
-						<br/><br/>
-						<label htmlFor="password" style={{color: 'gray', marginTop: 10}}>Password</label>
-						<input type="password" className="login-input" name="password"  onChange={(event) => this._onHandleChange(event)} value={this.state.password}/>
-						<br/><br/>
-						<p style={{color: 'red'}}>{this.props.errorLogin}</p>
-						{
-							(this.props.loading) ?
-							<div className="loader"></div> 
-							: <button className="login-button" onClick={() => this._onSubmit()}>Login</button>
-						}
-					</div>
-
-				</CardSection>
+				<div style={{marginTop: '61px'}}>
+					<CardSection>
+						<div className="login-container">
+							<form onSubmit={(e) => this._onSubmit(e)} id="loginForm">
+								<label htmlFor="username" style={{color: 'gray'}}>Username</label>
+								<input type="email" className="login-input" name="username" onChange={(event) => this._onHandleChange(event)} value={this.state.username} required/>
+								<br/><br/>
+								<label htmlFor="password" style={{color: 'gray', marginTop: 10}}>Password</label>
+								<input type="password" className="login-input" name="password"  onChange={(event) => this._onHandleChange(event)} value={this.state.password} required/>
+							</form>
+							<br/><br/>
+							<p style={{color: 'red'}}>{this.props.errorLogin}</p>
+							{
+								(this.props.loading) ?
+								<div className="loader"></div> 
+								: <button className="login-button" type="submit" form="loginForm">Login</button>
+							}
+						</div>
+					</CardSection>
+				</div>
 			</div>
 		);
 	}

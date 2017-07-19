@@ -15,15 +15,15 @@ const style = {
 		color: 'white',
 		padding: '1em',
 	},
-	buttonTextStyle: {
+	buttonIconRightStyle: {
 		color: 'white',
 		position: 'absolute', 
 		right: '0.2em', 
-		fontSize: '40px',
-		marginTop: '0.2em',
+		fontSize: '23px',
+		marginTop: '0.5em',
 		backgroundColor: 'transparent',
 		border: 'none',
-		padding: '0 15px'
+		padding: '5px 12px'
 	},
 	buttonIconStyle: {
 		color: 'white',
@@ -43,7 +43,7 @@ const Header = ({ isPlus, isBack, isDel, clickDel }) => {
 			{ (isDel) ? <button style={style.buttonIconStyle} onClick={clickDel}><i className="fa fa-minus" aria-hidden="true" style={{color: 'white'}}></i></button> : '' }
 		 	{ (isBack) ? <Link to="/home"><button style={style.buttonIconStyle}><i className="fa fa-chevron-left" aria-hidden="true" style={{color: 'white'}}></i></button></Link> : '' }
 			<h3 style={style.textStyle}>BEAUTY</h3>
-			{ (isPlus) ? <Link to="/addsale"><button style={style.buttonTextStyle}>+</button></Link> : '' }
+			{ (isPlus) ? <Link to="/addsale"><button style={style.buttonIconRightStyle}><i className="fa fa-plus" aria-hidden="true" style={{color: 'white'}}></i></button></Link> : '' }
 			
 		</div>
 	)

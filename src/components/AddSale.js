@@ -26,7 +26,8 @@ class AddSale extends Component {
 	    });
 	}
 
-	_onSubmit() {
+	_onSubmit(e) {
+		e.preventDefault();
 		let { name, type, gram, piece } = this.state;
 		this.props.saleCreate({ name, type, gram, piece });
 	}
@@ -37,28 +38,30 @@ class AddSale extends Component {
 				<Header isBack={true}/>
 					<div className="Sale-container">
 						<h2 style={{textAlign: 'center'}}>Sale</h2>
-						<label htmlFor="name" style={{color: 'gray'}}>Name</label>
-						<input type="text" className="Sale-input" name="name" onChange={(event) => this._onHandleChange(event)} value={this.state.name}/>
-						<br/><br/>
-						<label htmlFor="type" style={{color: 'gray'}}>Type</label>
-						<select name="type" className="Sale-select" onChange={(event) => this._onHandleChange(event)} value={this.state.type}>
-							<option value="White Cream Face" >White Cream Face</option>
-							<option value="Collagen Q10">Collagen Q10</option>=
-						</select>
-						<br/><br/>
-						<label htmlFor="gram" style={{color: 'gray'}}>Gram</label>
-						<select name="gram" className="Sale-select" onChange={(event) => this._onHandleChange(event)} value={this.state.gram}>
-							<option value="5" >5 Gram</option>
-							<option value="10">10 Gram</option>
-						</select>
-						<br/><br/>
-						<label htmlFor="piece" style={{color: 'gray'}}>Piece</label>
-						<input type="number" className="Sale-input" name="piece" style={{width: '30%', display: 'block'}} onChange={(event) => this._onHandleChange(event)} value={this.state.piece}/>
+						<form onSubmit={(e) => this._onSubmit(e)} id="saleForm">
+							<label htmlFor="name" style={{color: 'gray'}}>Buyer Name</label>
+							<input type="text" className="Sale-input" name="name" onChange={(event) => this._onHandleChange(event)} value={this.state.name} required/>
+							<br/><br/>
+							<label htmlFor="type" style={{color: 'gray'}}>Type of Cream</label>
+							<select name="type" className="Sale-select" onChange={(event) => this._onHandleChange(event)} value={this.state.type} required>
+								<option value="White Cream Face" >White Cream Face</option>
+								<option value="Collagen Q10">Collagen Q10</option>=
+							</select>
+							<br/><br/>
+							<label htmlFor="gram" style={{color: 'gray'}}>Gram</label>
+							<select name="gram" className="Sale-select" onChange={(event) => this._onHandleChange(event)} value={this.state.gram} required>
+								<option value="5" >5 Gram</option>
+								<option value="10">10 Gram</option>
+							</select>
+							<br/><br/>
+							<label htmlFor="piece" style={{color: 'gray'}}>Piece</label>
+							<input type="number" className="Sale-input" name="piece" style={{width: '30%', display: 'block'}} onChange={(event) => this._onHandleChange(event)} value={this.state.piece} required/>
+						</form>
 						<br/><br/>
 						{
 							(this.props.loading) ?
 							<div className="loader"></div> 
-							: <button className="Sale-button" onClick={() => this._onSubmit()}>Submit</button>
+							: <button className="Sale-button" type="submit" form="saleForm">Submit</button>
 						}
 					</div>
 			</div>
