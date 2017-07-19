@@ -1,6 +1,7 @@
 import * as firebase from 'firebase';
 import {
 	SALE_FETCH,
+	SALE_FETCH_SUCCESS,
 	SALE_CREATE,
 	SALE_CREATE_SUCCESS,
 	SALE_UPDATE,
@@ -9,6 +10,7 @@ import {
 
 export const saleFetch = () => {
 	return (dispatch) => {
+		dispatch({ type: SALE_FETCH });
 		saleFetching(dispatch);
 	}
 }
@@ -16,7 +18,7 @@ export const saleFetch = () => {
 const saleFetching = (dispatch) => {
 	let saleRef = firebase.database().ref('sale');
 	saleRef.on('value', function(snapshot) {
-		dispatch({ type: SALE_FETCH, payload: snapshot });
+		dispatch({ type: SALE_FETCH_SUCCESS, payload: snapshot });
 	});
 }
 

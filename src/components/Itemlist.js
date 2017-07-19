@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { saleFetch, saleUpdate, saleDelete } from '../actions';
 import { CardSection, Item } from './element';
 
+import './Itemlist.css';
+
 class Itemlist extends Component {
 	constructor(props) {
 		super(props);
@@ -86,6 +88,8 @@ class Itemlist extends Component {
 					})
 				}
 				
+				{ (this.props.loading) ? <div className="itemlist-loader"></div> : '' }
+				
 				
 			</div>
 		);
@@ -93,9 +97,9 @@ class Itemlist extends Component {
 }
 
 const mapStateToProps = ({ sale }) => {
-	const { saleList } = sale;
+	const { saleList, loading } = sale;
 	return {
-		saleList
+		saleList, loading
 	}
 }
 
